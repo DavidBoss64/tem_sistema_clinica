@@ -44,11 +44,8 @@ def inject_active_path():
 
 @app.route("/")
 def home():
-    #Mas adelante para el login
     return redirect(url_for('paciente.index'))
 
-
-if __name__ == "__main__":
     with app.app_context():
         db.create_all() #Pas4ra crear tablas de base de datos
 
@@ -60,6 +57,10 @@ if __name__ == "__main__":
             print("===========================================================")
             print("CUENTA DE ACCESO CREADA: Usuario: admin | Contraseña: 123")
             print("===========================================================")
+    #Mas adelante para el login
+
+
+if __name__ == "__main__":
     app.run(debug=True)
 
 
