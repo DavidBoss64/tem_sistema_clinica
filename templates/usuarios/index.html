@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}USUARIOS{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="m-0">Control de Usuarios con Acceso</h1>
+        <a href="{{ url_for('usuario.create') }}" class="btn btn-success">➕ Nuevo Usuario</a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <table class="table table-striped table-hover m-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre Completo</th>
+                        <th>Nombre de Usuario</th>
+                        <th>Rol / Cargo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for item in usuarios %}
+                    <tr>
+                        <td class="align-middle">{{ item.id }}</td>
+                        <td class="align-middle fw-bold">{{ item.nombre }}</td>
+                        <td class="align-middle text-secondary">{{ item.username }}</td>
+                        <td class="align-middle">
+                            <span class="badge {% if item.rol == 'Administrador' %}bg-danger{% elif item.rol == 'Médico' %}bg-primary{% else %}bg-secondary{% endif %}">
+                                {{ item.rol }}
+                            </span>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}CONSULTAS | REGISTRO{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-success text-white">
+                    <h3 class="mb-0">Registrar Nueva Consulta Médica</h3>
+                </div>
+                <div class="card-body">
+                    <form action="{{ url_for('consulta.create') }}" method="POST">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Seleccionar Paciente</label>
+                                <select class="form-select" name="paciente_id" required>
+                                    <option value="" disabled selected>-- Seleccione un paciente --</option>
+                                    {% for p in pacientes %}
+                                        <option value="{{ p.id }}">{{ p.nombre }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Seleccionar Médico</label>
+                                <select class="form-select" name="medico_id" required>
+                                    <option value="" disabled selected>-- Seleccione un médico --</option>
+                                    {% for m in medicos %}
+                                        <option value="{{ m.id }}">Dr(a). {{ m.nombre }} ({{ m.especialidad }})</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Fecha de la Consulta</label>
+                            <input type="date" class="form-control" name="fecha" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Diagnóstico Médico</label>
+                            <textarea class="form-control" name="diagnostico" rows="3" required></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Tratamiento Prescrito</label>
+                            <textarea class="form-control" name="tratamiento" rows="3" required></textarea>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ url_for('consulta.index') }}" class="btn btn-secondary">Cancelar</a>
+                            <button type="submit" class="btn btn-success">Guardar Consulta</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

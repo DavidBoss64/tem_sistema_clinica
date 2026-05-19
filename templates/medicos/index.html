@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}MÉDICOS{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="m-0">Lista de Médicos</h1>
+        <a href="{{ url_for('medico.create') }}" class="btn btn-success">➕ Nuevo Médico</a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <table class="table table-striped table-hover m-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre Completo</th>
+                        <th>Especialidad</th>
+                        <th>Teléfono</th>
+                        <th>Correo</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for item in medicos %}
+                    <tr>
+                        <td class="align-middle">{{ item.id }}</td>
+                        <td class="align-middle">{{ item.nombre }}</td>
+                        <td class="align-middle">{{ item.especialidad }}</td>
+                        <td class="align-middle">{{ item.telefono }}</td>
+                        <td class="align-middle">{{ item.correo }}</td>
+                        <td class="text-center align-middle">
+                            <a href="{{ url_for('medico.edit', id=item.id) }}" class="btn btn-primary btn-sm">Editar</a>
+                            <a href="{{ url_for('medico.delete', id=item.id) }}" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar este registro médico?');">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

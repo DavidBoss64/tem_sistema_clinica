@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}PACIENTES | REGISTRO{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-success text-white">
+                    <h3 class="mb-0">Registro de Nuevo Paciente</h3>
+                </div>
+                <div class="card-body">
+                    <form action="{{ url_for('paciente.create') }}" method="POST">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Nombre Completo</label>
+                            <input type="text" class="form-control" name="nombre" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-bold">Edad</label>
+                                <input type="number" class="form-control" name="edad" required>
+                            </div>
+                            <div class="col-md-8 mb-3">
+                                <label class="form-label fw-bold">Teléfono</label>
+                                <input type="text" class="form-control" name="telefono" required>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Dirección</label>
+                            <input type="text" class="form-control" name="direccion" required>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ url_for('paciente.index') }}" class="btn btn-secondary">Cancelar</a>
+                            <button type="submit" class="btn btn-success">Guardar Paciente</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

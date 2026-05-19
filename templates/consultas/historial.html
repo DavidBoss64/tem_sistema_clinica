@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}HISTORIAL CLÍNICO{% endblock %}
+
+{% block content %}
+    <div class="card mb-4 shadow-sm border-0">
+        <div class="card-body bg-dark text-white d-flex justify-content-between align-items-center">
+            <div>
+                <h2 class="mb-1">Historial Clínico Completo</h2>
+                <p class="m-0 text-light-50">Paciente: <strong class="text-warning">{{ paciente.nombre }}</strong> | Edad: {{ paciente.edad }} años</p>
+            </div>
+            <a href="{{ url_for('paciente.index') }}" class="btn btn-outline-light">Volver a Pacientes</a>
+        </div>
+    </div>
+
+    <h4 class="mb-3">Línea de Tiempo de Atenciones</h4>
+    
+    {% if consultas %}
+        {% for c in consultas %}
+            <div class="card mb-3 shadow-sm border-start border-primary border-4">
+                <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                    <span class="badge bg-primary fs-6">Fecha: {{ c.fecha.strftime('%d/%m/%Y') }}</span>
+                    <span class="text-muted fw-bold">Atendido por: Dr(a). {{ c.medico.nombre }} ({{ c.medico.especialidad }})</span>
+                </div>
+                <div class="card-body">
+                    <p class="card-text"><strong>Diagnóstico:</strong> {{ c.diagnostico }}</p>
+                    <p class="card-text mb-0"><strong>Tratamiento prescrito:</strong> {{ c.tratamiento }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-info text-center py-4" role="alert">
+            Este paciente aún no registra consultas médicas en el sistema.
+        </div>
+    {% endif %}
+{% endblock %}
